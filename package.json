@@ -1,0 +1,48 @@
+{
+  "name": "devconnect",
+  "version": "1.0.0",
+  "description": "Developer Networking Platform - Full Stack Application",
+  "keywords": [
+    "developer",
+    "networking",
+    "react",
+    "nodejs",
+    "mongodb",
+    "fullstack"
+  ],
+  "license": "MIT",
+  "author": "DevConnect Team",
+  "type": "module",
+  "main": "server/src/app.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "start": "npm run server:start",
+    "build": "npm run client:build",
+    "install:all": "npm install && npm run install:server && npm run install:client",
+    "install:server": "cd server && npm install",
+    "install:client": "cd devconnect-app && npm install",
+    "server:dev": "cd server && npm run dev",
+    "server:start": "cd server && npm start",
+    "client:dev": "cd devconnect-app && npm run dev",
+    "client:build": "cd devconnect-app && npm run build",
+    "client:preview": "cd devconnect-app && npm run preview",
+    "lint": "npm run lint:server && npm run lint:client",
+    "lint:server": "cd server && npm run lint",
+    "lint:client": "cd devconnect-app && npm run lint",
+    "clean": "npm run clean:server && npm run clean:client",
+    "clean:server": "cd server && rm -rf node_modules package-lock.json",
+    "clean:client": "cd devconnect-app && rm -rf node_modules package-lock.json dist",
+    "reset": "npm run clean && npm run install:all"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "workspaces": [
+    "server",
+    "devconnect-app"
+  ]
+}

@@ -1,0 +1,46 @@
+services:
+  # Backend API Service
+  - type: web
+    name: devconnect-backend
+    env: node
+    plan: free
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false
+      - key: BCRYPT_ROUNDS
+        value: 12
+      - key: RATE_LIMIT_WINDOW
+        value: 900000
+      - key: RATE_LIMIT_MAX
+        value: 100
+      - key: MAX_FILE_SIZE
+        value: 5242880
+      - key: DEFAULT_PAGE_SIZE
+        value: 10
+      - key: MAX_PAGE_SIZE
+        value: 50
+
+  # Frontend Static Site
+  - type: web
+    name: devconnect-frontend
+    env: static
+    plan: free
+    buildCommand: cd devconnect-app && npm install && npm run build
+    staticPublishPath: devconnect-app/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://devconnect-backend.onrender.com
+      - key: VITE_APP_NAME
+        value: DevConnect
+      - key: VITE_APP_VERSION
+        value: 1.0.0
